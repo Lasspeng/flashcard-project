@@ -28,6 +28,7 @@
     "content-type": "^1.0.4",
     "cookie": "^0.5.0",
     "cookie-signature": "^1.0.6",
+    "cors": "^2.8.5",
     "create-require": "^1.1.1",
     "debug": "^2.6.9",
     "denque": "^2.1.0",
@@ -128,6 +129,7 @@
     "yn": "^3.1.1"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.12",
     "@types/express": "^4.17.14",
     "nodemon": "^2.0.20",
     "ts-node": "^10.9.1"
