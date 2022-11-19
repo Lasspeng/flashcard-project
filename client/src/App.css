@@ -23,14 +23,13 @@ input {
 
 .decks {
   display: grid;
-  width: 500px;
-  height: 120px;
   margin: 0 auto;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 20px;
 }
 
 .decks div {
+  position: relative;
   width: 100%;
   max-width: 300px;
   min-width: 200px;
@@ -40,7 +39,7 @@ input {
   border-radius: 10px;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.24);
   border: 2px solid rgba(7, 7, 7, 0.12);
-  font-size: 16px;
+  font-size: 22px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -49,3 +48,11 @@ input {
   transition: all 0.3s ease;
 }
 
+.decks button {
+  font-size: 16px;
+  color: white;
+  background-color:  #292929;
+  position: absolute;
+  top: 5px;
+  right: 3px;
+}

@@ -15,7 +15,7 @@ function App() {
   async function handleCreateDeck(e: React.FormEvent) {
     e.preventDefault();
     if (title === '') return;
-    await fetch('http://localhost:4000/decks', {
+    const response = await fetch('http://localhost:4000/decks', {
       method: 'POST',
       body: JSON.stringify({
         title,
@@ -25,6 +25,9 @@ function App() {
       },
     })
     setTitle('');
+    // Rerender to include the newly added deck
+    const newDeck = await response.json(); 
+    setDecks([...decks, newDeck])
   };
 
   // Request array of decks from database
@@ -36,6 +39,15 @@ function App() {
     }
     fetchDecks();
   }, [])
+
+  async function handleDeleteDeck(deckId: string) {
+    await fetch(`http://localhost:4000/decks/${deckId}`, {
+      method: 'DELETE',
+    });
+    
+    // Rerender to exclude the newly deleted deck
+    setDecks(decks.filter((deck) => deck._id !== deckId));
+  }
 
   return (
     <div className='app'>
@@ -50,7 +62,10 @@ function App() {
       </form>
       <div className='decks'>
         {decks.map((deck) => (
-          <div key={deck._id}>{deck.title}</div>
+          <div key={deck._id}>
+            <button onClick={() => handleDeleteDeck(deck._id)}>X</button>
+            {deck.title}
+          </div>
         ))}
       </div>
     </div>
