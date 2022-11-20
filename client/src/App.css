@@ -44,8 +44,8 @@ input {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  cursor: pointer;
   transition: all 0.3s ease;
+  color: white;
 }
 
 .decks button {
@@ -55,4 +55,8 @@ input {
   position: absolute;
   top: 5px;
   right: 3px;
+}
+
+.deck-link {
+  color: white;
 }

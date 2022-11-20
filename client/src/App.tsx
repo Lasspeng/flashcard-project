@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import './App.css';
 
-interface Deck {
-  title: string,
-  _id: string;
-};
+import getDecks, { Deck } from './api/getDecks';
+import createDeck from './api/createDeck';
+import deleteDeck from './api/deleteDeck';
+
+
 
 function App() {
   const [title, setTitle] = useState('');
@@ -15,36 +16,24 @@ function App() {
   async function handleCreateDeck(e: React.FormEvent) {
     e.preventDefault();
     if (title === '') return;
-    const response = await fetch('http://localhost:4000/decks', {
-      method: 'POST',
-      body: JSON.stringify({
-        title,
-      }),
-      headers: {
-        "Content-Type": "application/json"
-      },
-    })
+    const newDeck = await createDeck(title);
     setTitle('');
+
     // Rerender to include the newly added deck
-    const newDeck = await response.json(); 
     setDecks([...decks, newDeck])
   };
 
   // Request array of decks from database
   useEffect(() => {
     async function fetchDecks() {
-      const response = await fetch('http://localhost:4000/decks');
-      const newDecks = await response.json()
-      setDecks(newDecks);
+      const decks = await getDecks();
+      setDecks(decks);
     }
     fetchDecks();
   }, [])
 
   async function handleDeleteDeck(deckId: string) {
-    await fetch(`http://localhost:4000/decks/${deckId}`, {
-      method: 'DELETE',
-    });
-    
+    await deleteDeck(deckId);
     // Rerender to exclude the newly deleted deck
     setDecks(decks.filter((deck) => deck._id !== deckId));
   }
@@ -64,7 +53,7 @@ function App() {
         {decks.map((deck) => (
           <div key={deck._id}>
             <button onClick={() => handleDeleteDeck(deck._id)}>X</button>
-            {deck.title}
+            {<Link className='deck-link' to={`decks/${deck._id}`}>{deck.title}</Link>}
           </div>
         ))}
       </div>
