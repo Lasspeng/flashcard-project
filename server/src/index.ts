@@ -5,6 +5,11 @@ import mongoose, { Mongoose } from 'mongoose';
 import Deck from './models/Deck';
 import cors from 'cors';
 
+import getDecksController from './controllers/getDecksController';
+import createDeckController from './controllers/createDeckController';
+import deleteDeckController from './controllers/deleteDeckController';
+import createCardForDeckController  from './controllers/createCardForDeckController';
+
 // Hide credentials for Mongo database access
 import { config } from 'dotenv';
 config();
@@ -15,23 +20,10 @@ app.use(express.json());
 
 const PORT: number = 4000;
 
-app.get('/decks', async (req: Request, res: Response) => {
-  const decks = await Deck.find();
-  console.log(decks);
-  res.json(decks);
-});
-
-app.post('/decks', async (req: Request, res: Response) => {
-  const newDeck = new Deck({ title: req.body.title });
-  const createdDeck = await newDeck.save();
-  res.json(createdDeck);
-});
-
-app.delete('/decks/:deckId', async (req: Request, res: Response) => {
-  const deckId = req.params.deckId;
-  const deletedDeck = await Deck.findByIdAndDelete(deckId);
-  res.json(deletedDeck);
-})
+app.get('/decks', getDecksController);
+app.post('/decks', createDeckController);
+app.delete('/decks/:deckId', deleteDeckController);
+app.post('/decks/:deckId/cards', createCardForDeckController);
 
 async function connectToDB() {
   try {

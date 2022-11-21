@@ -5,6 +5,10 @@ const ObjectId = mongoose.Types.ObjectId;
 
 const DeckSchema = new Schema({
   title: String,
+  cards: [{
+    header: String,
+    body: String
+  }],
 })
 
 const DeckModel = mongoose.model('Deck', DeckSchema);
