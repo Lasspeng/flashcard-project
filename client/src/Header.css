@@ -1,0 +1,13 @@
+.Header {
+  height: 80px;
+  background-color: rgb(176, 176, 176);
+  margin-bottom: 50px;
+  font-size: large;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Header-link {
+  color: black;
+}

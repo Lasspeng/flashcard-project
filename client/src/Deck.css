@@ -1,14 +1,16 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
 body {
   font-family: helvetica;
 }
 
-.app, .deck {
-  margin: 0 10px;
-}
-
 form {
   display: flex;
-  font-size: 16px;
   margin-bottom: 10px;
   gap: 10px;
   align-items: center;
@@ -17,25 +19,25 @@ form {
 
 input {
   min-height: 30px;
+  font-size: 16px;
 }
 
-.decks, .cards {
+
+.decks {
   display: grid;
-  align-self: center;
-  justify-items: center;
-  margin: 0;
+  margin: 0 auto;
   grid-template-columns: repeat(3, 1fr);
-  grid-row-gap: 20px;
+  grid-gap: 20px;
 }
 
-.decks div, .cards div {
+.decks div {
   position: relative;
   width: 100%;
   max-width: 300px;
   min-width: 200px;
-  min-height: 250px;
+  height: 250px;
   background-color: #292929;
-  margin: 20px 10px;
+  margin: 10px;
   border-radius: 10px;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.24);
   border: 2px solid rgba(7, 7, 7, 0.12);
@@ -44,20 +46,11 @@ input {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 15px;
-  text-align: center;
+  transition: all 0.3s ease;
+  color: white;
 }
 
-h1 {
-  text-align: center;
-  margin-top: 80px;
-}
-
-h3 {
-  margin-top: 30px;
-}
-
-.decks button, .cards button {
+.decks button {
   font-size: 16px;
   color: white;
   background-color:  #292929;

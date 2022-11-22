@@ -1,15 +1,15 @@
 import { Request, Response } from 'express';
 import Deck from '../models/Deck';
 
-async function createCardForDeckController(req: Request, res: Response) {
+async function deleteCardForDeckController(req: Request, res: Response) {
   const deckId = req.params.deckId;
+  const cardIndex = req.params.index;
   const deck = await Deck.findById(deckId);
-  const card = req.body;
 
   if (!deck) return res.status(400).send('No deck of this id exists');
-  deck.cards.push(card);
+  deck.cards.splice(parseInt(cardIndex), 1);
   await deck.save();
-  res.json(deck.cards[deck.cards.length - 1]);
+  res.json(deck);
 }
 
-export default createCardForDeckController;
+export default deleteCardForDeckController;
